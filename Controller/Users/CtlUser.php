@@ -1,8 +1,8 @@
 <?php
 
 require '../../Infraestructure/CORS.php';
-require '../../DTO/Employees/EmployeeDTO.php';
-require '../../DAO/Employees/EmployeeDAO.php';
+require '../../DTO/Users/UserDTO.php';
+require '../../DAO/Users/UserDAO.php';
 require '../../Helper/Action/Action.php';
 require '../../Infraestructure/Security.php';
 /*
@@ -19,11 +19,14 @@ $documentNumer = getInfo('documentNumer');
 $gender = getInfo('gender');
 $admissionDate = getInfo('admissionDate');
 $age = getInfo('age');
+$birthCity = getInfo('birthCity');
+$birthDate = getInfo('birthDate');
 $rol = getInfo('rol');
+$point = getInfo('point');
 $id = getInfo('id');
 
 
-$obj = new EmployeeDTO($id, $names, $lastNames, $documentType, $documentNumber, $gender, $admissionDate, $age, $rol);
-$dao = new EmployeeDAO();
+$obj = new UserDTO($id, $names, $lastNames, $documentType, $documentNumber, $gender, $admissionDate, $age, $birthCity, $birthDate, $rol, $point);
+$dao = new userDAO();
 
 ExecuteAction($action, $obj, $dao);

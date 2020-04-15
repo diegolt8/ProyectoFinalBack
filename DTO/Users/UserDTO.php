@@ -8,7 +8,7 @@
 
 require_once ('../../DTO/BaseDTO.php');
 
-class EmployeeDTO extends BaseDTO {
+class UserDTO extends BaseDTO {
 
     private $id;
     private $names;
@@ -18,9 +18,12 @@ class EmployeeDTO extends BaseDTO {
     private $gender;
     private $admissionDate;
     private $age;
+    private $birthCity;
+    private $birthDate;
     private $rol;
+    private $point;
 
-    function __construct($id, $names, $lastNames, $documentType, $documentNumber, $gender, $admissionDate, $age, $rol) {
+    function __construct($id, $names, $lastNames, $documentType, $documentNumber, $gender, $admissionDate, $age, $birthCity, $birthDate, $rol, $point) {
         $this->id = $id;
         $this->names = $names;
         $this->lastNames = $lastNames;
@@ -29,7 +32,10 @@ class EmployeeDTO extends BaseDTO {
         $this->gender = $gender;
         $this->admissionDate = $admissionDate;
         $this->age = $age;
+        $this->birthCity = $birthCity;
+        $this->birthDate = $birthDate;
         $this->rol = $rol;
+        $this->point = $point;
     }
 
     function getId() {
@@ -64,8 +70,20 @@ class EmployeeDTO extends BaseDTO {
         return $this->age;
     }
 
+    function getBirthCity() {
+        return $this->birthCity;
+    }
+
+    function getBirthDate() {
+        return $this->birthDate;
+    }
+
     function getRol() {
         return $this->rol;
+    }
+
+    function getPoint() {
+        return $this->point;
     }
 
     function setId($id) {
@@ -100,8 +118,20 @@ class EmployeeDTO extends BaseDTO {
         $this->age = $age;
     }
 
+    function setBirthCity($birthCity) {
+        $this->birthCity = $birthCity;
+    }
+
+    function setBirthDate($birthDate) {
+        $this->birthDate = $birthDate;
+    }
+
     function setRol($rol) {
         $this->rol = $rol;
+    }
+
+    function setPoint($point) {
+        $this->point = $point;
     }
 
 }
