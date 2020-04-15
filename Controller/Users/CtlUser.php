@@ -19,14 +19,29 @@ $documentNumer = getInfo('documentNumer');
 $gender = getInfo('gender');
 $admissionDate = getInfo('admissionDate');
 $age = getInfo('age');
-$birthCity = getInfo('birthCity');
 $birthDate = getInfo('birthDate');
 $rol = getInfo('rol');
 $point = getInfo('point');
+$ciudad_id = getInfo('ciudad_id');
+$departamento_id = getInfo('departamento_id');
 $id = getInfo('id');
 
 
-$obj = new UserDTO($id, $names, $lastNames, $documentType, $documentNumber, $gender, $admissionDate, $age, $birthCity, $birthDate, $rol, $point);
+$obj = new UserDTO(
+    $id,
+    $names,
+    $lastNames,
+    $documentType,
+    $documentNumber,
+    $gender,
+    $admissionDate,
+    $age,
+    $ciudad_id,
+    $departamento_id,
+    $birthDate,
+    $rol,
+    $point
+);
 $dao = new userDAO();
 
 ExecuteAction($action, $obj, $dao);

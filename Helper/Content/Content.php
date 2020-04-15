@@ -10,8 +10,8 @@ $idrol = $_SESSION["TypeUser"];
 $page = (isset($_GET['page']) ? $_GET['page'] : "");
 
 /* DEFINICION DE OBJETOS */
-$obj = new ContentDTO($page, $idrol);
-$conex = new ContentDAO();
+// $obj = new ContentDTO($page, $idrol);
+// $conex = new ContentDAO();
 
 /* CONTROL DE ACCIONES */
 $conex->ValidatePage($obj);

@@ -9,8 +9,8 @@ require 'DAO/Menu/MenuDAO.php';
 $rol = $_SESSION["TypeUser"];
 
 /* DEFINICION DE OBJETOS */
-$obj = new MenuDTO($rol);
-$conex = new MenuDAO();
+// $obj = new MenuDTO($rol);
+// $conex = new MenuDAO();
 
 /* CONTROL DE ACCIONES */
 $conex->LoadMenu($obj);

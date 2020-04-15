@@ -13,7 +13,8 @@ $action = getInfo('action');
 $name = getInfo('name');
 $nit = getInfo('nit');
 $address = getInfo('address');
-$city = getInfo('city');
+$ciudad_id = getInfo('ciudad_id');
+$departamento_id = getInfo('departamento_id');
 $id = getInfo('id');
 
 
@@ -28,7 +29,8 @@ if ($security->validarTokenUser($token)) {
         $name,
         $nit,
         $address,
-        $city
+        $ciudad_id,
+        $departamento_id
     );
 
     $dao = new ProviderDAO();
