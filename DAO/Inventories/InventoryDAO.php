@@ -28,7 +28,9 @@ class InventoryDAO
             (string) $obj->getMiligramos(),
             (string) $obj->getNames(), (string) $obj->getDescription(), (string) $obj->getAdmissionDate(),
             (string) $obj->getExpirationDate(), (string) $obj->getLoteCode(), (int) $obj->getQuantity(),
-            (int) $obj->getPrice(), (int) $obj->getLaboratory_id()
+            (int) $obj->getPrice(), (int) $obj->getLaboratory_id(), (int) $obj->getEstante_id(),
+            (int) $obj->getProveedor_id(), (int) $obj->getProveedor_ciudad_id(), (int) $obj->getProveedor_department_id(),
+            (int) $obj->getTipoProducto_id()
         ));
         $this->repository->ExecuteTransaction($query);
     }
@@ -70,7 +72,9 @@ class InventoryDAO
             (string) $obj->getMiligramos(),
             (string) $obj->getNames(), (string) $obj->getDescription(), (string) $obj->getAdmissionDate(),
             (string) $obj->getExpirationDate(), (string) $obj->getLoteCode(), (int) $obj->getQuantity(),
-            (int) $obj->getPrice(), (int) $obj->getLaboratory_id()
+            (int) $obj->getPrice(), (int) $obj->getLaboratory_id(), (int) $obj->getEstante_id(),
+            (int) $obj->getProveedor_id(), (int) $obj->getProveedor_ciudad_id(), (int) $obj->getProveedor_department_id(),
+            (int) $obj->getTipoProducto_id()
         ));
         $this->repository->ExecuteTransaction($query);
     }
