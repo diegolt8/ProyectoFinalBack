@@ -1,0 +1,59 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="63F936B7-CC21-EEE0-EEE6-7451F9409C6E" name="typeProduct">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 21:43:51 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<ordsAlias>table_3</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="30F192C0-7290-F4D5-7F34-6E15975392C5">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 21:45:02 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="name" id="384482F6-2C21-0DDB-814D-63002E81FD10">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 21:45:02 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="description" id="EEEAC92D-D37C-6930-3212-9D042452C6F6">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 21:45:02 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E655C012-1A4E-90EB-E1B4-20E1F1EE36FE" name="typeProduct_PK">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 21:45:02 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="30F192C0-7290-F4D5-7F34-6E15975392C5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

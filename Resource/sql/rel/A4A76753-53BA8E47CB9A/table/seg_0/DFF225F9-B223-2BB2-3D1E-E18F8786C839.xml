@@ -1,0 +1,222 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="DFF225F9-B223-2BB2-3D1E-E18F8786C839" name="inventory">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:00:48 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<ordsAlias>table_11</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="16011D60-AC9E-8DBF-922B-C54942361065">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:01:09 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="milligrams" id="816B1F7F-712A-3D46-F8CC-2142BFA70D62">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:04:48 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="name" id="A1E136D6-4ACA-B8FE-37CE-064C4351BEBC">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:02:28 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="description" id="D5D08EED-3CBB-EF1D-7F4D-B14CA2C8EF13">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:02:28 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5000</dataTypeSize>
+<ownDataTypeParameters>5000,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="admissionDate" id="7021F69C-159E-CA2F-EFF0-405294EFCE78">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:02:28 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="expirationDate" id="BF7252EF-C267-37A1-6984-D7A462FA7C89">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:02:58 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="loteCode" id="7E4F2E79-32FE-BD84-B9F4-EB8449860EE6">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:04:12 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="quantity" id="532A3418-55D0-3B92-1BEA-10095227ABFB">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:04:12 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="price" id="9210493E-1D59-3EEE-362F-3D4C0C11A0CF">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:04:12 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Provider_id" id="4D47FF36-F3EC-B088-31FB-99AFBBF20E24">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:10:02 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="598D5F77-35B9-48B6-23B8-0C1CA269E0E1" referredColumn="D5F5BE25-4B21-77A5-B23B-93750FBAA489"/>
+</associations>
+</Column>
+<Column name="Shelf_id" id="26C3AD25-0FC6-3B6D-1167-1939B8A7243A">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:10:24 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="EC7465F8-A37B-977C-F571-2CC11D81CDD5" referredColumn="39FA57BD-EF38-EEBC-041C-A4F3CC15DC5E"/>
+</associations>
+</Column>
+<Column name="typeProduct_id" id="19BFABDB-691A-EFD2-5FA5-2E4E78184D29">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:11:55 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="9C6DE37D-6F74-6383-D3FB-879881170F20" referredColumn="30F192C0-7290-F4D5-7F34-6E15975392C5"/>
+</associations>
+</Column>
+<Column name="laboratory_id" id="836557E2-8199-0AF6-3CA8-05CDB81149D5">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:16:43 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7A2D0291-B365-CC65-44BB-B5B42E67E190" referredColumn="C052D8D8-DDE0-438E-A376-18A68815F100"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="6E19E245-41A0-600C-D0EA-1868843CEE20" name="inventory_PK">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:01:09 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="16011D60-AC9E-8DBF-922B-C54942361065"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="E0AAA1B6-F424-6362-3BBA-3FD8232889BD" name="inventory_Provider_FK">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:10:02 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4D47FF36-F3EC-B088-31FB-99AFBBF20E24"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D8876485-E63B-56C8-CAC3-2CCA174E3F66" name="inventory_Shelf_FK">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:10:24 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="26C3AD25-0FC6-3B6D-1167-1939B8A7243A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="200A090E-27AA-FC44-D548-21DAD7D8FE01" name="inventory_typeProduct_FK">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:11:55 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="19BFABDB-691A-EFD2-5FA5-2E4E78184D29"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A6A50C97-3443-A0BB-8764-BC0400F4A6B3" name="inventory_laboratory_FK">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:16:43 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="836557E2-8199-0AF6-3CA8-05CDB81149D5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

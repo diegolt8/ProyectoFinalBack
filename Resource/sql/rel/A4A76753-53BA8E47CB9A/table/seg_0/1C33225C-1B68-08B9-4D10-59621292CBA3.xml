@@ -1,0 +1,83 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="1C33225C-1B68-08B9-4D10-59621292CBA3" name="city">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 21:45:35 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<ordsAlias>table_4</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="F41A0057-5078-EC63-C347-C82C58D0621F">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 21:47:48 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="name" id="C5E53085-CABE-9F5D-DFF3-A93ED72883DF">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 21:47:48 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="description" id="3743B0C5-C7D0-5BC6-481A-453AAD07B510">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 21:47:48 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="department_id" id="E75D8BE7-817C-E747-939F-E25260102DED">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:08:43 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8A2B9D61-B7DC-3D49-F77F-70D5F01B3339" referredColumn="B2F3EA67-F384-A73F-557D-C9BF021406FC"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2C964626-3850-2B79-F291-AE001DEA751A" name="city_PK">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 21:47:48 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F41A0057-5078-EC63-C347-C82C58D0621F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="3CC96CB5-B097-244E-5234-AA6A0665B93A" name="city_department_FK">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-23 22:08:43 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E75D8BE7-817C-E747-939F-E25260102DED"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
