@@ -11,127 +11,137 @@ require_once ('../../DTO/BaseDTO.php');
 class UserDTO extends BaseDTO {
 
     private $id;
-    private $names;
-    private $lastNames;
-    private $documentType;
-    private $documentNumber;
+    private $name;
+    private $lastnames;
+    private $documenttype;
+    private $documentnumber;
     private $gender;
-    private $admissionDate;
     private $age;
-    private $birthCity;
-    private $birthDate;
-    private $rol;
-    private $point;
+    private $birhdate;
+    private $points;
+    private $password;
+    private $rol_id;
+    private $city_id;
+    private $admissiondate;
 
-    function __construct($id, $names, $lastNames, $documentType, $documentNumber, $gender, $admissionDate, $age, $birthCity, $birthDate, $rol, $point) {
+    function __construct($id, $name, $lastnames, $documenttype, $documentnumber, $gender, $age, $birhdate, $points, $password, $rol_id, $city_id, $admissiondate) {
         $this->id = $id;
-        $this->names = $names;
-        $this->lastNames = $lastNames;
-        $this->documentType = $documentType;
-        $this->documentNumber = $documentNumber;
+        $this->name = $name;
+        $this->lastnames = $lastnames;
+        $this->documenttype = $documenttype;
+        $this->documentnumber = $documentnumber;
         $this->gender = $gender;
-        $this->admissionDate = $admissionDate;
         $this->age = $age;
-        $this->birthCity = $birthCity;
-        $this->birthDate = $birthDate;
-        $this->rol = $rol;
-        $this->point = $point;
+        $this->birhdate = $birhdate;
+        $this->points = $points;
+        $this->password = $password;
+        $this->rol_id = $rol_id;
+        $this->city_id = $city_id;
+        $this->admissiondate = $admissiondate;
     }
 
     function getId() {
         return $this->id;
     }
 
-    function getNames() {
-        return $this->names;
+    function getName() {
+        return $this->name;
     }
 
-    function getLastNames() {
-        return $this->lastNames;
+    function getLastnames() {
+        return $this->lastnames;
     }
 
-    function getDocumentType() {
-        return $this->documentType;
+    function getDocumenttype() {
+        return $this->documenttype;
     }
 
-    function getDocumentNumber() {
-        return $this->documentNumber;
+    function getDocumentnumber() {
+        return $this->documentnumber;
     }
 
     function getGender() {
         return $this->gender;
     }
 
-    function getAdmissionDate() {
-        return $this->admissionDate;
-    }
-
     function getAge() {
         return $this->age;
     }
 
-    function getBirthCity() {
-        return $this->birthCity;
+    function getBirhdate() {
+        return $this->birhdate;
     }
 
-    function getBirthDate() {
-        return $this->birthDate;
+    function getPoints() {
+        return $this->points;
     }
 
-    function getRol() {
-        return $this->rol;
+    function getPassword() {
+        return $this->password;
     }
 
-    function getPoint() {
-        return $this->point;
+    function getRol_id() {
+        return $this->rol_id;
+    }
+
+    function getCity_id() {
+        return $this->city_id;
+    }
+
+    function getAdmissiondate() {
+        return $this->admissiondate;
     }
 
     function setId($id) {
         $this->id = $id;
     }
 
-    function setNames($names) {
-        $this->names = $names;
+    function setName($name) {
+        $this->name = $name;
     }
 
-    function setLastNames($lastNames) {
-        $this->lastNames = $lastNames;
+    function setLastnames($lastnames) {
+        $this->lastnames = $lastnames;
     }
 
-    function setDocumentType($documentType) {
-        $this->documentType = $documentType;
+    function setDocumenttype($documenttype) {
+        $this->documenttype = $documenttype;
     }
 
-    function setDocumentNumber($documentNumber) {
-        $this->documentNumber = $documentNumber;
+    function setDocumentnumber($documentnumber) {
+        $this->documentnumber = $documentnumber;
     }
 
     function setGender($gender) {
         $this->gender = $gender;
     }
 
-    function setAdmissionDate($admissionDate) {
-        $this->admissionDate = $admissionDate;
-    }
-
     function setAge($age) {
         $this->age = $age;
     }
 
-    function setBirthCity($birthCity) {
-        $this->birthCity = $birthCity;
+    function setBirhdate($birhdate) {
+        $this->birhdate = $birhdate;
     }
 
-    function setBirthDate($birthDate) {
-        $this->birthDate = $birthDate;
+    function setPoints($points) {
+        $this->points = $points;
     }
 
-    function setRol($rol) {
-        $this->rol = $rol;
+    function setPassword($password) {
+        $this->password = $password;
     }
 
-    function setPoint($point) {
-        $this->point = $point;
+    function setRol_id($rol_id) {
+        $this->rol_id = $rol_id;
+    }
+
+    function setCity_id($city_id) {
+        $this->city_id = $city_id;
+    }
+
+    function setAdmissiondate($admissiondate) {
+        $this->admissiondate = $admissiondate;
     }
 
 }

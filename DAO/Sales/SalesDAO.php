@@ -17,9 +17,10 @@ class SaleDAO
     public function Save(SaleDTO $obj)
     {
         $query = $this->repository->buildQuerySimply("savesale", array(
-            (int) $obj->getUsuario_id(), (int) $obj->getRol_id(),
-            (int) $obj->getFactura_id(), (string) $obj->getSaleDate(),
-            (int) $obj->getQuatity(), (int) $obj->getSaleTotal()
+            (string) $obj->getSaledate(),
+            (int) $obj->getSaletotal(),
+            (int) $obj->getClient_id(),
+            (int) $obj->getEmployee_id()
         ));
         $this->repository->ExecuteTransaction($query);
     }
@@ -54,9 +55,10 @@ class SaleDAO
     {
         $query = $this->repository->buildQuerySimply("savesale", array(
             (int) $obj->getId(),
-            (int) $obj->getUsuario_id(), (int) $obj->getRol_id(),
-            (int) $obj->getFactura_id(), (string) $obj->getSaleDate(),
-            (int) $obj->getQuatity(), (int) $obj->getSaleTotal()
+            (string) $obj->getSaledate(),
+            (int) $obj->getSaletotal(),
+            (int) $obj->getClient_id(),
+            (int) $obj->getEmployee_id()
         ));
         $this->repository->ExecuteTransaction($query);
     }

@@ -46,6 +46,17 @@
 <colAssociation fkAssociation="E3858C78-D950-FF44-A32A-3FD6737D0CB4" referredColumn="3E137728-064D-E816-2FAA-56A3D27A894C"/>
 </associations>
 </Column>
+<Column name="quantity" id="D1D04278-4176-03B2-99CD-45F2EA88E990">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-24 19:42:03 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="CB29364E-4C47-09CC-D7D3-333B79C640FD" name="detailSale_PK">

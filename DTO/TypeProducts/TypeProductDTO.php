@@ -1,46 +1,41 @@
 <?php
 
-class TypeProductDTO extends BaseDTO
-{
+require_once '../../DTO/BaseDTO.php';
+
+class TypeProductDTO extends BaseDTO {
 
     private $id;
     private $name;
     private $description;
 
-    function __construct($id, $name, $description)
-    {
+    function __construct($id, $name, $description) {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
     }
 
-    function getId()
-    {
+    function getId() {
         return $this->id;
     }
 
-    function getName()
-    {
+    function getName() {
         return $this->name;
     }
 
-    function getDescription()
-    {
+    function getDescription() {
         return $this->description;
     }
 
-    function setId($id)
-    {
+    function setId($id) {
         $this->id = $id;
     }
 
-    function setName($name)
-    {
+    function setName($name) {
         $this->name = $name;
     }
 
-    function setDescription($description)
-    {
+    function setDescription($description) {
         $this->description = $description;
     }
+
 }

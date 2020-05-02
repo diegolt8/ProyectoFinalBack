@@ -13,8 +13,7 @@ $action = getInfo('action');
 $name = getInfo('name');
 $nit = getInfo('nit');
 $address = getInfo('address');
-$ciudad_id = getInfo('ciudad_id');
-$departamento_id = getInfo('departamento_id');
+$city_id = getInfo('city_id');
 $id = getInfo('id');
 
 
@@ -24,13 +23,12 @@ $token = getInfo('token');
 $security = new Security();
 
 if ($security->validarTokenUser($token)) {
-    $obj = new ProductDTO(
+    $obj = new ProviderDTO(
         $id,
         $name,
         $nit,
         $address,
-        $ciudad_id,
-        $departamento_id
+        $city_id
     );
 
     $dao = new ProviderDAO();

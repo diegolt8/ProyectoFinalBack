@@ -165,6 +165,32 @@
 <colAssociation fkAssociation="7A2D0291-B365-CC65-44BB-B5B42E67E190" referredColumn="C052D8D8-DDE0-438E-A376-18A68815F100"/>
 </associations>
 </Column>
+<Column name="status_id" id="F1654BB0-1ADF-4A27-1327-B5D6E524D6AA">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-24 19:40:32 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="CBC14EAC-1881-6D8A-538B-AE31D1C56A75" referredColumn="A18F8602-8825-8FB2-AC8E-A5B35AB0E253"/>
+</associations>
+</Column>
+<Column name="imagen" id="E6537FB7-86F1-7B2A-CE2A-CDD7684C41F1">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-24 20:06:10 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="6E19E245-41A0-600C-D0EA-1868843CEE20" name="inventory_PK">
@@ -216,6 +242,16 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="836557E2-8199-0AF6-3CA8-05CDB81149D5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="93ABF015-8175-A963-B3EE-26DBAD61E41A" name="inventory_status_FK">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-24 19:40:32 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F1654BB0-1ADF-4A27-1327-B5D6E524D6AA"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

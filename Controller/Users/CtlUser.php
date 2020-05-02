@@ -12,35 +12,35 @@ require '../../Infraestructure/Security.php';
  */
 
 $action = getInfo('action');
-$names = getInfo('names');
-$lastNames = getInfo('lastNames');
-$documentType = getInfo('documentType');
-$documentNumer = getInfo('documentNumer');
+$name = getInfo('name');
+$lastname = getInfo('lastname');
+$documenttype = getInfo('documenttype');
+$documentnumber = getInfo('documentnumber');
 $gender = getInfo('gender');
-$admissionDate = getInfo('admissionDate');
 $age = getInfo('age');
-$birthDate = getInfo('birthDate');
-$rol = getInfo('rol');
-$point = getInfo('point');
-$ciudad_id = getInfo('ciudad_id');
-$departamento_id = getInfo('departamento_id');
+$birthdate = getInfo('birthdate');
+$points = getInfo('points');
+$password = getInfo('password');
+$rol_id = getInfo('rol_id');
+$city_id = getInfo('city_id');
+$admissiondate = getInfo('admissiondate');
 $id = getInfo('id');
 
 
 $obj = new UserDTO(
     $id,
-    $names,
-    $lastNames,
-    $documentType,
-    $documentNumber,
+    $name,
+    $lastname,
+    $documenttype,
+    $documentnumber,
     $gender,
-    $admissionDate,
     $age,
-    $ciudad_id,
-    $departamento_id,
-    $birthDate,
-    $rol,
-    $point
+    $birthdate,
+    $points,
+    $password,
+    $rol_id,
+    $city_id,
+    $admissiondate
 );
 $dao = new userDAO();
 

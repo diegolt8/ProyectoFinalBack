@@ -15,7 +15,7 @@ class ProviderDAO
     {
         $query = $this->repository->buildQuerySimply("saveprovider", array(
             (string) $obj->getName(),
-            (string) $obj->getNit(), (string) $obj->getAddress(), (string) $obj->getCity()
+            (string) $obj->getNit(), (string) $obj->getAddress(), (string) $obj->getCity_id()
         ));
         $this->repository->ExecuteTransaction($query);
     }

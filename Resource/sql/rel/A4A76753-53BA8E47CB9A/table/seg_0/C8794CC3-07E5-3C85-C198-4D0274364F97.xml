@@ -46,6 +46,20 @@
 <colAssociation fkAssociation="10D89F26-997B-64F1-267F-F3F4332C9A5A" referredColumn="3509F426-5885-A9AE-A7B9-DF9B6FB6FE17"/>
 </associations>
 </Column>
+<Column name="Sale_id" id="340E4ACC-D106-8DFB-CDC3-C098B57CFE2B">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-24 19:38:12 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B14BF30C-B008-6171-0FA8-D8388F96C4D6" referredColumn="3E137728-064D-E816-2FAA-56A3D27A894C"/>
+</associations>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="22F8D6A4-022F-15CD-954B-962E8B45F76F" name="invoice_PK">
@@ -77,6 +91,16 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="A5D45DB2-A5A4-4C8C-0040-5C281AF5AD4A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B4877A6B-AD33-D888-2A73-CA792FCEB018" name="invoice_Sale_FK">
+<createdBy>diego</createdBy>
+<createdTime>2020-04-24 19:38:12 UTC</createdTime>
+<ownerDesignName>sql</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="340E4ACC-D106-8DFB-CDC3-C098B57CFE2B"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

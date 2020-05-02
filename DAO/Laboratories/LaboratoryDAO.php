@@ -35,7 +35,7 @@ class LaboratoryDAO
 
     public function Update(LaboratoryDTO $obj)
     {
-        $query = $this->repository->buildQuerySimply('savelaboratory', array(
+        $query = $this->repository->buildQuerySimply('updatelaboratory', array(
             (int) $obj->getId(),
             (string) $obj->getName(),
             (string) $obj->getDescription()

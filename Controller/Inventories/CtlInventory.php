@@ -9,20 +9,20 @@ require '../../Infraestructure/Security.php';
 /* Recepcion de datos */
 
 $action = getInfo('action');
-$miligramos = getInfo('miligramos');
-$names = getInfo('names');
+$miligrams = getInfo('miligrams');
+$name = getInfo('name');
 $description = getInfo('description');
-$admissionDate = getInfo('admissionDate');
-$expirationDate = getInfo('expirationDate');
-$loteCode = getInfo('loteCode');
+$admissiondate = getInfo('admissiondate');
+$expirationdate = getInfo('expirationdate');
+$lotecode = getInfo('lotecode');
 $quantity = getInfo('quantity');
 $price = getInfo('price');
+$provider_id = getInfo('provider_id');
+$shelf_id = getInfo('shelf_id');
+$typeproduct_id = getInfo('typeproduct_id');
 $laboratory_id = getInfo('laboratory_id');
-$estante_id = getInfo('estante_id');
-$proveedor_id = getInfo('proveedor_id');
-$proveedor_ciudad_id = getInfo('proveedor_ciudad_id');
-$proveedor_department_id = getInfo('proveedor_department_id');
-$tipoProducto_id = getInfo('tipoProducto_id');
+$status_id = getInfo('status_id');
+$imagen = getInfo('imagen');
 $id = getInfo('id');
 
 
@@ -33,21 +33,21 @@ $security = new Security();
 
 if ($security->validarTokenUser($token)) {
     $obj = new InventoryDTO(
-            $id,
-            $miligramos,
-            $names,
-            $description,
-            $admissionDate,
-            $expirationDate,
-            $loteCode,
-            $quantity,
-            $price,
-            $laboratory_id,
-            $estante_id,
-            $proveedor_id,
-            $proveedor_ciudad_id,
-            $proveedor_department_id,
-            $tipoProducto_id
+        $id,
+        $miligrams,
+        $name,
+        $description,
+        $admissiondate,
+        $expirationdate,
+        $lotecode,
+        $quantity,
+        $price,
+        $provider_id,
+        $shelf_id,
+        $typeproduct_id,
+        $laboratory_id,
+        $status_id,
+        $imagen
     );
 
     $dao = new InventoryDAO();

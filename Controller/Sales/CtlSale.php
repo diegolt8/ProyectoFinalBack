@@ -10,12 +10,10 @@ require '../../Infraestructure/Security.php';
 /* Recepcion de datos */
 
 $action = getInfo('action');
-$usuario_id = getInfo('usuario_id');
-$rol_id = getInfo('rol_id');
-$factura_id = getInfo('factura_id');
-$saleDate = getInfo('SaleDate');
-$quatity = getInfo('quatity');
-$saleTotal = getInfo('saletotal');
+$saledate = getInfo('saledate');
+$saletotal = getInfo('saletotal');
+$client_id = getInfo('client_id');
+$employee_id = getInfo('employee_id');
 $id = getInfo('id');
 
 
@@ -27,12 +25,10 @@ $security = new Security();
 if ($security->validarTokenUser($token)) {
     $obj = new SaleDTO(
         $id,
-        $usuario_id,
-        $rol_id,
-        $factura_id,
-        $saleDate,
-        $quatity,
-        $saleTotal
+        $saledate,
+        $saletotal,
+        $client_id,
+        $employee_id
     );
 
     $dao = new SaleDAO();

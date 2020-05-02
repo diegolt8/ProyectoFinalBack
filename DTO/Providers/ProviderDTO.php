@@ -14,14 +14,14 @@ class ProviderDTO extends BaseDTO {
     private $name;
     private $nit;
     private $address;
-    private $city;
+    private $city_id;
 
-    function __construct($id, $name, $nit, $address, $city) {
+    function __construct($id, $name, $nit, $address, $city_id) {
         $this->id = $id;
         $this->name = $name;
         $this->nit = $nit;
         $this->address = $address;
-        $this->city = $city;
+        $this->city_id = $city_id;
     }
 
     function getId() {
@@ -40,8 +40,8 @@ class ProviderDTO extends BaseDTO {
         return $this->address;
     }
 
-    function getCity() {
-        return $this->city;
+    function getCity_id() {
+        return $this->city_id;
     }
 
     function setId($id) {
@@ -60,8 +60,8 @@ class ProviderDTO extends BaseDTO {
         $this->address = $address;
     }
 
-    function setCity($city) {
-        $this->city = $city;
+    function setCity_id($city_id) {
+        $this->city_id = $city_id;
     }
 
 }

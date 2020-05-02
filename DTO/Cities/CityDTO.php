@@ -13,11 +13,13 @@ class CityDTO extends BaseDTO {
     private $id;
     private $name;
     private $description;
+    private $department_id;
 
-    function __construct($id, $name, $description) {
+    function __construct($id, $name, $description, $department_id) {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
+        $this->department_id = $department_id;
     }
 
     function getId() {
@@ -32,6 +34,10 @@ class CityDTO extends BaseDTO {
         return $this->description;
     }
 
+    function getDepartment_id() {
+        return $this->department_id;
+    }
+
     function setId($id) {
         $this->id = $id;
     }
@@ -42,6 +48,10 @@ class CityDTO extends BaseDTO {
 
     function setDescription($description) {
         $this->description = $description;
+    }
+
+    function setDepartment_id($department_id) {
+        $this->department_id = $department_id;
     }
 
 }

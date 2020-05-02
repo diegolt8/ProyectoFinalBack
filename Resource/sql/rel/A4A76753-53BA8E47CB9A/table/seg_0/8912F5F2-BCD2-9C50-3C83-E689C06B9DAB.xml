@@ -29,7 +29,7 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="quantity" id="204D3962-D245-A3AE-9C3D-D0D1B46D4D7B">
+<Column name="saleTotal" id="8987FC2A-D610-F8B1-A563-447BA23F5B94">
 <createdBy>diego</createdBy>
 <createdTime>2020-04-23 21:58:37 UTC</createdTime>
 <ownerDesignName>sql</ownerDesignName>
@@ -40,18 +40,7 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="sakeTotal" id="8987FC2A-D610-F8B1-A563-447BA23F5B94">
-<createdBy>diego</createdBy>
-<createdTime>2020-04-23 21:58:37 UTC</createdTime>
-<ownerDesignName>sql</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="user_id" id="03AB1D35-18A6-3D82-4CAF-D33ED6AC09CB">
+<Column name="client_id" id="03AB1D35-18A6-3D82-4CAF-D33ED6AC09CB">
 <createdBy>diego</createdBy>
 <createdTime>2020-04-23 22:15:00 UTC</createdTime>
 <ownerDesignName>sql</ownerDesignName>
@@ -65,9 +54,9 @@
 <colAssociation fkAssociation="03A1870C-BBEC-1281-5CA5-7E7E4942E106" referredColumn="3509F426-5885-A9AE-A7B9-DF9B6FB6FE17"/>
 </associations>
 </Column>
-<Column name="invoice_id" id="8B760848-720A-1BF3-DBF1-4FAB0F73482E">
+<Column name="employee_id" id="8AEB9E03-D6C0-6468-2523-F47431D14259">
 <createdBy>diego</createdBy>
-<createdTime>2020-04-23 22:15:25 UTC</createdTime>
+<createdTime>2020-04-24 19:44:04 UTC</createdTime>
 <ownerDesignName>sql</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -76,7 +65,7 @@
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
-<colAssociation fkAssociation="994D4490-1433-5350-F78B-1D593CA3801A" referredColumn="0C423792-9F25-4E68-AA23-A4AA0230E2FC"/>
+<colAssociation fkAssociation="E39B376E-5498-95DE-AE46-DA81B7FA25AA" referredColumn="3509F426-5885-A9AE-A7B9-DF9B6FB6FE17"/>
 </associations>
 </Column>
 </columns>
@@ -102,14 +91,14 @@
 <colUsage columnID="03AB1D35-18A6-3D82-4CAF-D33ED6AC09CB"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="42F34F8C-03DB-C3A9-F500-CBA0A5762B78" name="Sale_invoice_FK">
+<ind_PK_UK id="F4BF8FCB-CA24-A47A-3AE6-DDB1C52272DE" name="Sale_user_FKv2">
 <createdBy>diego</createdBy>
-<createdTime>2020-04-23 22:15:25 UTC</createdTime>
+<createdTime>2020-04-24 19:44:04 UTC</createdTime>
 <ownerDesignName>sql</ownerDesignName>
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="8B760848-720A-1BF3-DBF1-4FAB0F73482E"/>
+<colUsage columnID="8AEB9E03-D6C0-6468-2523-F47431D14259"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

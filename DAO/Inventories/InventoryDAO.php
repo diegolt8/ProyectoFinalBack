@@ -25,12 +25,11 @@ class InventoryDAO
     public function Save(InventoryDTO $obj)
     {
         $query = $this->repository->buildQuerySimply("saveinventory", array(
-            (string) $obj->getMiligramos(),
-            (string) $obj->getNames(), (string) $obj->getDescription(), (string) $obj->getAdmissionDate(),
+            (string) $obj->getMiligrams(),
+            (string) $obj->getName(), (string) $obj->getDescription(), (string) $obj->getAdmissionDate(),
             (string) $obj->getExpirationDate(), (string) $obj->getLoteCode(), (int) $obj->getQuantity(),
-            (int) $obj->getPrice(), (int) $obj->getLaboratory_id(), (int) $obj->getEstante_id(),
-            (int) $obj->getProveedor_id(), (int) $obj->getProveedor_ciudad_id(), (int) $obj->getProveedor_department_id(),
-            (int) $obj->getTipoProducto_id()
+            (int) $obj->getPrice(), (int) $obj->getProvider_id(), (int) $obj->getShelf_id(), (int) $obj->getTypeproduct_id(),
+            (int) $obj->getLaboratory_id(), (int) $obj->getStatus_id(), (string) $obj->getImagen()
         ));
         $this->repository->ExecuteTransaction($query);
     }
@@ -69,12 +68,11 @@ class InventoryDAO
     {
         $query = $this->repository->buildQuerySimply("updateinventory", array(
             (int) $obj->getId(),
-            (string) $obj->getMiligramos(),
-            (string) $obj->getNames(), (string) $obj->getDescription(), (string) $obj->getAdmissionDate(),
+            (string) $obj->getMiligrams(),
+            (string) $obj->getName(), (string) $obj->getDescription(), (string) $obj->getAdmissionDate(),
             (string) $obj->getExpirationDate(), (string) $obj->getLoteCode(), (int) $obj->getQuantity(),
-            (int) $obj->getPrice(), (int) $obj->getLaboratory_id(), (int) $obj->getEstante_id(),
-            (int) $obj->getProveedor_id(), (int) $obj->getProveedor_ciudad_id(), (int) $obj->getProveedor_department_id(),
-            (int) $obj->getTipoProducto_id()
+            (int) $obj->getPrice(), (int) $obj->getProvider_id(), (int) $obj->getShelf_id(), (int) $obj->getTypeproduct_id(),
+            (int) $obj->getLaboratory_id(), (int) $obj->getStatus_id(), (string) $obj->getImagen()
         ));
         $this->repository->ExecuteTransaction($query);
     }

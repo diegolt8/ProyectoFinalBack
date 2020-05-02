@@ -1,6 +1,6 @@
 <?php
 
-class rolDTO {
+class RolDTO {
 
     private $id;
     private $name;

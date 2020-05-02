@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -9,81 +9,59 @@
 require_once '../../DTO/BaseDTO.php';
 
 class SaleDTO extends BaseDTO {
-   private $id;
-   private $usuario_id;
-   private $rol_id;
-   private $factura_id;
-   private $saleDate;
-   private $quatity;
-   private $saleTotal;
-   
-   function __construct($id, $usuario_id, $rol_id, $factura_id, $saleDate, $quatity, $saleTotal) {
-       $this->id = $id;
-       $this->usuario_id = $usuario_id;
-       $this->rol_id = $rol_id;
-       $this->factura_id = $factura_id;
-       $this->saleDate = $saleDate;
-       $this->quatity = $quatity;
-       $this->saleTotal = $saleTotal;
-   }
-   
-   function getId() {
-       return $this->id;
-   }
 
-   function getUsuario_id() {
-       return $this->usuario_id;
-   }
+    private $id;
+    private $saledate;
+    private $saletotal;
+    private $client_id;
+    private $employee_id;
 
-   function getRol_id() {
-       return $this->rol_id;
-   }
+    function __construct($id, $saledate, $saletotal, $client_id, $employee_id) {
+        $this->id = $id;
+        $this->saledate = $saledate;
+        $this->saletotal = $saletotal;
+        $this->client_id = $client_id;
+        $this->employee_id = $employee_id;
+    }
 
-   function getFactura_id() {
-       return $this->factura_id;
-   }
+    function getId() {
+        return $this->id;
+    }
 
-   function getSaleDate() {
-       return $this->saleDate;
-   }
+    function getSaledate() {
+        return $this->saledate;
+    }
 
-   function getQuatity() {
-       return $this->quatity;
-   }
+    function getSaletotal() {
+        return $this->saletotal;
+    }
 
-   function getSaleTotal() {
-       return $this->saleTotal;
-   }
+    function getClient_id() {
+        return $this->client_id;
+    }
 
-   function setId($id) {
-       $this->id = $id;
-   }
+    function getEmployee_id() {
+        return $this->employee_id;
+    }
 
-   function setUsuario_id($usuario_id) {
-       $this->usuario_id = $usuario_id;
-   }
+    function setId($id) {
+        $this->id = $id;
+    }
 
-   function setRol_id($rol_id) {
-       $this->rol_id = $rol_id;
-   }
+    function setSaledate($saledate) {
+        $this->saledate = $saledate;
+    }
 
-   function setFactura_id($factura_id) {
-       $this->factura_id = $factura_id;
-   }
+    function setSaletotal($saletotal) {
+        $this->saletotal = $saletotal;
+    }
 
-   function setSaleDate($saleDate) {
-       $this->saleDate = $saleDate;
-   }
+    function setClient_id($client_id) {
+        $this->client_id = $client_id;
+    }
 
-   function setQuatity($quatity) {
-       $this->quatity = $quatity;
-   }
-
-   function setSaleTotal($saleTotal) {
-       $this->saleTotal = $saleTotal;
-   }
-
-
+    function setEmployee_id($employee_id) {
+        $this->employee_id = $employee_id;
+    }
 
 }
-

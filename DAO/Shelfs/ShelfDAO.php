@@ -46,7 +46,7 @@ class ShelfDAO
 
     public function Delete(ShelfDTO $obj)
     {
-        $query = $this->repository->buildQuery("deleteshelf", array((int) $obj->getId()));
+        $query = $this->repository->buildQuerySimply("deleteshelf", array((int) $obj->getId()));
         $this->repository->ExecuteTransaction($query);
     }
 }

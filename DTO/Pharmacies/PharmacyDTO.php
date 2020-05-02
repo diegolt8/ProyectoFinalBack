@@ -2,16 +2,22 @@
 
 require_once '../../DTO/BaseDTO.php';
 
-class FarmacyDTO extends BaseDTO {
+class PharmacyDTO extends BaseDTO {
 
+    private $id;
     private $name;
     private $logo;
     private $nit;
 
-    function __construct($name, $logo, $nit) {
+    function __construct($id, $name, $logo, $nit) {
+        $this->id = $id;
         $this->name = $name;
         $this->logo = $logo;
         $this->nit = $nit;
+    }
+
+    function getId() {
+        return $this->id;
     }
 
     function getName() {
@@ -24,6 +30,10 @@ class FarmacyDTO extends BaseDTO {
 
     function getNit() {
         return $this->nit;
+    }
+
+    function setId($id) {
+        $this->id = $id;
     }
 
     function setName($name) {

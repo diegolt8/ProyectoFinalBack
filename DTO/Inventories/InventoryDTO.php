@@ -10,65 +10,65 @@ require_once '../../DTO/BaseDTO.php';
 class InventoryDTO extends BaseDTO {
 
     private $id;
-    private $miligramos;
-    private $names;
+    private $miligrams;
+    private $name;
     private $description;
-    private $admissionDate;
-    private $expirationDate;
-    private $loteCode;
+    private $admissiondate;
+    private $expirationdate;
+    private $lotecode;
     private $quantity;
     private $price;
+    private $provider_id;
+    private $shelf_id;
+    private $typeproduct_id;
     private $laboratory_id;
-    private $estante_id;
-    private $proveedor_id;
-    private $proveedor_ciudad_id;
-    private $proveedor_department_id;
-    private $tipoProducto_id;
+    private $status_id;
+    private $imagen;
 
-    function __construct($id, $miligramos, $names, $description, $admissionDate, $expirationDate, $loteCode, $quantity, $price, $laboratory_id, $estante_id, $proveedor_id, $proveedor_ciudad_id, $proveedor_department_id, $tipoProducto_id) {
+    function __construct($id, $miligrams, $name, $description, $admissiondate, $expirationdate, $lotecode, $quantity, $price, $provider_id, $shelf_id, $typeproduct_id, $laboratory_id, $status_id, $imagen) {
         $this->id = $id;
-        $this->miligramos = $miligramos;
-        $this->names = $names;
+        $this->miligrams = $miligrams;
+        $this->name = $name;
         $this->description = $description;
-        $this->admissionDate = $admissionDate;
-        $this->expirationDate = $expirationDate;
-        $this->loteCode = $loteCode;
+        $this->admissiondate = $admissiondate;
+        $this->expirationdate = $expirationdate;
+        $this->lotecode = $lotecode;
         $this->quantity = $quantity;
         $this->price = $price;
+        $this->provider_id = $provider_id;
+        $this->shelf_id = $shelf_id;
+        $this->typeproduct_id = $typeproduct_id;
         $this->laboratory_id = $laboratory_id;
-        $this->estante_id = $estante_id;
-        $this->proveedor_id = $proveedor_id;
-        $this->proveedor_ciudad_id = $proveedor_ciudad_id;
-        $this->proveedor_department_id = $proveedor_department_id;
-        $this->tipoProducto_id = $tipoProducto_id;
+        $this->status_id = $status_id;
+        $this->imagen = $imagen;
     }
 
     function getId() {
         return $this->id;
     }
 
-    function getMiligramos() {
-        return $this->miligramos;
+    function getMiligrams() {
+        return $this->miligrams;
     }
 
-    function getNames() {
-        return $this->names;
+    function getName() {
+        return $this->name;
     }
 
     function getDescription() {
         return $this->description;
     }
 
-    function getAdmissionDate() {
-        return $this->admissionDate;
+    function getAdmissiondate() {
+        return $this->admissiondate;
     }
 
-    function getExpirationDate() {
-        return $this->expirationDate;
+    function getExpirationdate() {
+        return $this->expirationdate;
     }
 
-    function getLoteCode() {
-        return $this->loteCode;
+    function getLotecode() {
+        return $this->lotecode;
     }
 
     function getQuantity() {
@@ -79,56 +79,56 @@ class InventoryDTO extends BaseDTO {
         return $this->price;
     }
 
+    function getProvider_id() {
+        return $this->provider_id;
+    }
+
+    function getShelf_id() {
+        return $this->shelf_id;
+    }
+
+    function getTypeproduct_id() {
+        return $this->typeproduct_id;
+    }
+
     function getLaboratory_id() {
         return $this->laboratory_id;
     }
 
-    function getEstante_id() {
-        return $this->estante_id;
+    function getStatus_id() {
+        return $this->status_id;
     }
 
-    function getProveedor_id() {
-        return $this->proveedor_id;
-    }
-
-    function getProveedor_ciudad_id() {
-        return $this->proveedor_ciudad_id;
-    }
-
-    function getProveedor_department_id() {
-        return $this->proveedor_department_id;
-    }
-
-    function getTipoProducto_id() {
-        return $this->tipoProducto_id;
+    function getImagen() {
+        return $this->imagen;
     }
 
     function setId($id) {
         $this->id = $id;
     }
 
-    function setMiligramos($miligramos) {
-        $this->miligramos = $miligramos;
+    function setMiligrams($miligrams) {
+        $this->miligrams = $miligrams;
     }
 
-    function setNames($names) {
-        $this->names = $names;
+    function setName($name) {
+        $this->name = $name;
     }
 
     function setDescription($description) {
         $this->description = $description;
     }
 
-    function setAdmissionDate($admissionDate) {
-        $this->admissionDate = $admissionDate;
+    function setAdmissiondate($admissiondate) {
+        $this->admissiondate = $admissiondate;
     }
 
-    function setExpirationDate($expirationDate) {
-        $this->expirationDate = $expirationDate;
+    function setExpirationdate($expirationdate) {
+        $this->expirationdate = $expirationdate;
     }
 
-    function setLoteCode($loteCode) {
-        $this->loteCode = $loteCode;
+    function setLotecode($lotecode) {
+        $this->lotecode = $lotecode;
     }
 
     function setQuantity($quantity) {
@@ -139,28 +139,28 @@ class InventoryDTO extends BaseDTO {
         $this->price = $price;
     }
 
+    function setProvider_id($provider_id) {
+        $this->provider_id = $provider_id;
+    }
+
+    function setShelf_id($shelf_id) {
+        $this->shelf_id = $shelf_id;
+    }
+
+    function setTypeproduct_id($typeproduct_id) {
+        $this->typeproduct_id = $typeproduct_id;
+    }
+
     function setLaboratory_id($laboratory_id) {
         $this->laboratory_id = $laboratory_id;
     }
 
-    function setEstante_id($estante_id) {
-        $this->estante_id = $estante_id;
+    function setStatus_id($status_id) {
+        $this->status_id = $status_id;
     }
 
-    function setProveedor_id($proveedor_id) {
-        $this->proveedor_id = $proveedor_id;
-    }
-
-    function setProveedor_ciudad_id($proveedor_ciudad_id) {
-        $this->proveedor_ciudad_id = $proveedor_ciudad_id;
-    }
-
-    function setProveedor_department_id($proveedor_department_id) {
-        $this->proveedor_department_id = $proveedor_department_id;
-    }
-
-    function setTipoProducto_id($tipoProducto_id) {
-        $this->tipoProducto_id = $tipoProducto_id;
+    function setImagen($imagen) {
+        $this->imagen = $imagen;
     }
 
 }
