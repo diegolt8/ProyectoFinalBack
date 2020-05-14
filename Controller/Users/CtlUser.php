@@ -26,22 +26,16 @@ $city_id = getInfo('city_id');
 $admissiondate = getInfo('admissiondate');
 $id = getInfo('id');
 
+/* Recepcion de token */
+//$token = getInfo('token');
+$security = new Security();
 
-$obj = new UserDTO(
-    $id,
-    $name,
-    $lastname,
-    $documenttype,
-    $documentnumber,
-    $gender,
-    $age,
-    $birthdate,
-    $points,
-    $password,
-    $rol_id,
-    $city_id,
-    $admissiondate
-);
-$dao = new userDAO();
+//if ($security->validarTokenUser($token)) {
+$passHash = password_hash($password, PASSWORD_BCRYPT);
+    $obj = new UserDTO(
+            $id, $name, $lastname, $documenttype, $documentnumber, $gender, $age, $birthdate, $points, $passHash, $rol_id, $city_id, $admissiondate
+    );
+    $dao = new userDAO();
 
-ExecuteAction($action, $obj, $dao);
+    ExecuteAction($action, $obj, $dao);
+//}

@@ -28,10 +28,10 @@ $id = getInfo('id');
 
 /* Recepcion del token */
 
-$token = getInfo('token');
+//$token = getInfo('token');
 $security = new Security();
 
-if ($security->validarTokenUser($token)) {
+//if ($security->validarTokenUser($token)) {
     $obj = new InventoryDTO(
         $id,
         $miligrams,
@@ -54,4 +54,4 @@ if ($security->validarTokenUser($token)) {
 
     /* Control de acciones */
     ExecuteAction($action, $obj, $dao);
-}
+//}

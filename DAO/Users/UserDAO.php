@@ -25,11 +25,19 @@ class userDAO
     {
         $query = $this->repository->buildQuerySimply("saveuser", array(
             (string) $obj->getName(),
-            (string) $obj->getLastnames(), (int) $obj->getDocumentType(), (int) $obj->getDocumentNumber(),
-            (int) $obj->getGender(), (string) $obj->getAdmissionDate(), (int) $obj->getAge(), (string) $obj->getBirhdate(),
-            (int) $obj->getRol_id(), (int) $obj->getPoints(), (int) $obj->getCity_id()
+            (string) $obj->getLastnames(),
+            (string) $obj->getDocumentType(),
+            (string) $obj->getDocumentNumber(),
+            (string) $obj->getGender(),
+            (int) $obj->getAge(),
+            (string) $obj->getBirhdate(),
+            (int) $obj->getPoints(),
+            (string) $obj->getPassword(),
+            (int) $obj->getRol_id(),
+            (int) $obj->getCity_id(),
+            (string) $obj->getAdmissionDate()
         ));
-        $this->repository->Execute($query);
+        $this->repository->ExecuteTransaction($query);
     }
 
     /**
