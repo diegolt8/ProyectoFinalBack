@@ -15,7 +15,7 @@ class ProviderDAO
     {
         $query = $this->repository->buildQuerySimply("saveprovider", array(
             (string) $obj->getName(),
-            (string) $obj->getNit(), (string) $obj->getAddress(), (string) $obj->getCity_id()
+            (string) $obj->getNit(), (string) $obj->getAddress(), (int) $obj->getCity_id()
         ));
         $this->repository->ExecuteTransaction($query);
     }
@@ -28,7 +28,7 @@ class ProviderDAO
 
     public function Search(ProviderDTO $obj)
     {
-        $query = $this->repository->buildQuery("updateprovider", array((int) $obj->getId()));
+        $query = $this->repository->buildQuery("searchprovider", array((int) $obj->getId()));
         $this->repository->Execute($query);
     }
 
@@ -37,13 +37,14 @@ class ProviderDAO
         $query = $this->repository->buildQuerySimply("updateprovider", array(
             (int) $obj->getId(),
             (string) $obj->getName(),
-            (string) $obj->getNit(), (string) $obj->getAddress(), (string) $obj->getCity()
+            (string) $obj->getNit(), (string) $obj->getAddress(), (int) $obj->getCity_id()
         ));
+        $this->repository->ExecuteTransaction($query);
     }
 
     public function Delete(ProviderDTO $obj)
     {
-        $query = $this->repository->buildQuery("deleteprovider", array((int) $obj->getId()));
+        $query = $this->repository->buildQuerySimply("deleteprovider", array((int) $obj->getId()));
         $this->repository->ExecuteTransaction($query);
     }
 }

@@ -25,17 +25,31 @@ $rol_id = getInfo('rol_id');
 $city_id = getInfo('city_id');
 $admissiondate = getInfo('admissiondate');
 $id = getInfo('id');
+$updatePass = getInfo('modifica');
 
 /* Recepcion de token */
 //$token = getInfo('token');
 $security = new Security();
 
 //if ($security->validarTokenUser($token)) {
-$passHash = password_hash($password, PASSWORD_BCRYPT);
-    $obj = new UserDTO(
-            $id, $name, $lastname, $documenttype, $documentnumber, $gender, $age, $birthdate, $points, $passHash, $rol_id, $city_id, $admissiondate
-    );
-    $dao = new userDAO();
 
-    ExecuteAction($action, $obj, $dao);
+if ($action === 'save') {
+    $passHash = password_hash($password, PASSWORD_BCRYPT);
+    $obj = new UserDTO($id, $name, $lastname, $documenttype, $documentnumber, $gender, $age, $birthdate, $points, $passHash, $rol_id, $city_id, $admissiondate);
+    $dao = new userDAO();
+} else if ($action === 'update') {
+    if ($updatePass === "true") {
+        $passHash = password_hash($password, PASSWORD_BCRYPT);
+        $obj = new UserDTO($id, $name, $lastname, $documenttype, $documentnumber, $gender, $age, $birthdate, $points, $passHash, $rol_id, $city_id, $admissiondate);
+        $dao = new userDAO();
+    } else {
+        $obj = new UserDTO($id, $name, $lastname, $documenttype, $documentnumber, $gender, $age, $birthdate, $points, $password, $rol_id, $city_id, $admissiondate);
+        $dao = new userDAO();
+    }
+} else {
+    $obj = new UserDTO($id, $name, $lastname, $documenttype, $documentnumber, $gender, $age, $birthdate, $points, $password, $rol_id, $city_id, $admissiondate);
+    $dao = new userDAO();
+}
+
+ExecuteAction($action, $obj, $dao);
 //}

@@ -25,7 +25,7 @@ class InventoryDAO
     public function Save(InventoryDTO $obj)
     {
         $query = $this->repository->buildQuerySimply("saveinventory", array(
-            (string) $obj->getMiligrams(),
+            (int) $obj->getMiligrams(),
             (string) $obj->getName(), (string) $obj->getDescription(), (string) $obj->getAdmissionDate(),
             (string) $obj->getExpirationDate(), (string) $obj->getLoteCode(), (int) $obj->getQuantity(),
             (int) $obj->getPrice(), (int) $obj->getProvider_id(), (int) $obj->getShelf_id(), (int) $obj->getTypeproduct_id(),
@@ -68,7 +68,7 @@ class InventoryDAO
     {
         $query = $this->repository->buildQuerySimply("updateinventory", array(
             (int) $obj->getId(),
-            (string) $obj->getMiligrams(),
+            (int) $obj->getMiligrams(),
             (string) $obj->getName(), (string) $obj->getDescription(), (string) $obj->getAdmissionDate(),
             (string) $obj->getExpirationDate(), (string) $obj->getLoteCode(), (int) $obj->getQuantity(),
             (int) $obj->getPrice(), (int) $obj->getProvider_id(), (int) $obj->getShelf_id(), (int) $obj->getTypeproduct_id(),
