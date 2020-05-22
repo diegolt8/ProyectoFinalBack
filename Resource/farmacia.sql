@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 14-05-2020 a las 01:27:20
+-- Tiempo de generación: 22-05-2020 a las 05:31:43
 -- Versión del servidor: 10.4.10-MariaDB
 -- Versión de PHP: 7.3.12
 
@@ -40,10 +40,36 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `listdepartment` (`vid` INT)  BEGIN
     order by id;
 END$$
 
+DROP PROCEDURE IF EXISTS `listinventory`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listinventory` (`vid` INT)  BEGIN
+	SELECT id, milligrams,name,
+						description,
+                        admissiondate,
+                        expirationdate,
+                        lotecode,
+                        quantity,
+                        price,
+                        provider_id,
+                        shelf_id,
+                        typeproduct_id,
+                        laboratory_id,
+                        status_id,
+                        imagen
+    FROM inventory
+    order by id;
+END$$
+
 DROP PROCEDURE IF EXISTS `listlaboratory`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listlaboratory` (`vid` INT)  BEGIN
 	SELECT id, name, description
     FROM laboratory
+    order by id;
+END$$
+
+DROP PROCEDURE IF EXISTS `listpharmacy`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listpharmacy` (`vid` INT)  BEGIN
+	SELECT id, name, imagen, nit
+    FROM pharmacy
     order by id;
 END$$
 
@@ -116,6 +142,18 @@ BEGIN
 RETURN 1;
 END$$
 
+DROP FUNCTION IF EXISTS `deleteinventory`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `deleteinventory` (`vid` INT) RETURNS INT(1) READS SQL DATA
+    DETERMINISTIC
+    COMMENT 'funcion que elimina un producto'
+BEGIN
+	declare res int default 0;
+	delete from inventory where id = vid;
+    set res = 1;
+    return res;
+RETURN 1;
+END$$
+
 DROP FUNCTION IF EXISTS `deletelaboratory`$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `deletelaboratory` (`vid` INT) RETURNS INT(1) READS SQL DATA
     DETERMINISTIC
@@ -123,6 +161,30 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `deletelaboratory` (`vid` INT) RETURN
 BEGIN
 	declare res int default 0;
 	delete from laboratory where id = vid;
+    set res = 1;
+    return res;
+RETURN 1;
+END$$
+
+DROP FUNCTION IF EXISTS `deletepharmacy`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `deletepharmacy` (`vid` INT) RETURNS INT(1) READS SQL DATA
+    DETERMINISTIC
+    COMMENT 'funcion que elimina una farmacia'
+BEGIN
+	declare res int default 0;
+	delete from pharmacy where id = vid;
+    set res = 1;
+    return res;
+RETURN 1;
+END$$
+
+DROP FUNCTION IF EXISTS `deleteprovider`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `deleteprovider` (`vid` INT) RETURNS INT(1) READS SQL DATA
+    DETERMINISTIC
+    COMMENT 'funcion que elimina un proveedor'
+BEGIN
+	declare res int default 0;
+	delete from provider where id = vid;
     set res = 1;
     return res;
 RETURN 1;
@@ -176,6 +238,18 @@ BEGIN
 RETURN 1;
 END$$
 
+DROP FUNCTION IF EXISTS `deleteuser`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `deleteuser` (`vid` INT) RETURNS INT(1) READS SQL DATA
+    DETERMINISTIC
+    COMMENT 'funcion que elimina un usuario'
+BEGIN
+	declare res int default 0;
+	delete from user where id = vid;
+    set res = 1;
+    return res;
+RETURN 1;
+END$$
+
 DROP FUNCTION IF EXISTS `savecity`$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `savecity` (`vname` VARCHAR(50), `vdescription` VARCHAR(50), `vdepartment_id` INTEGER) RETURNS INT(1) READS SQL DATA
     DETERMINISTIC
@@ -207,7 +281,7 @@ RETURN res;
 END$$
 
 DROP FUNCTION IF EXISTS `saveinventory`$$
-CREATE DEFINER=`root`@`localhost` FUNCTION `saveinventory` (`vmiligrams` INT, `vname` VARCHAR(100), `vdescription` VARCHAR(5000), `vadmissiondate` DATETIME, `vexpirationdate` DATETIME, `vlotecode` VARCHAR(10), `vquantity` INT, `vprice` INT, `vprovider_id` INT, `vshelf_id` INT, `vtypeproduct_id` INT, `vlaboratory_id` INT, `vstatus_id` INT, `vimagen` VARCHAR(5000)) RETURNS INT(1) READS SQL DATA
+CREATE DEFINER=`root`@`localhost` FUNCTION `saveinventory` (`vmilligrams` INT, `vname` VARCHAR(100), `vdescription` VARCHAR(5000), `vadmissiondate` DATE, `vexpirationdate` DATE, `vlotecode` VARCHAR(10), `vquantity` INT, `vprice` INT, `vprovider_id` INT, `vshelf_id` INT, `vtypeproduct_id` INT, `vlaboratory_id` INT, `vstatus_id` INT, `vimagen` VARCHAR(5000)) RETURNS INT(1) READS SQL DATA
     DETERMINISTIC
     COMMENT 'Funcion que guarda una medicamento'
 BEGIN
@@ -228,7 +302,7 @@ BEGIN
                                 laboratory_id,
                                 status_id,
                                 imagen)
-			     values (vmiligrams,
+			     values (vmilligrams,
 								vname,
 								vdescription,
                                 vadmissiondate,
@@ -257,6 +331,21 @@ if not exists(select name from laboratory where name=vname)
 	then
 		insert into laboratory(name, description)
 			values (vname, vdescription);
+            set res = 1;
+end if;
+RETURN res;
+END$$
+
+DROP FUNCTION IF EXISTS `savepharmacy`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `savepharmacy` (`vname` VARCHAR(50), `vimagen` VARCHAR(5000), `vnit` VARCHAR(200)) RETURNS INT(1) READS SQL DATA
+    DETERMINISTIC
+    COMMENT 'Funcion que almace una farmacia'
+BEGIN
+	declare res int default 0;
+if not exists(select name from pharmacy where name=vname)
+	then
+		insert into pharmacy(name, imagen, nit)
+			values (vname, vimagen, vnit);
             set res = 1;
 end if;
 RETURN res;
@@ -418,6 +507,40 @@ IF NOT EXISTS(select name from department where name=vname and id<>vid)
 	RETURN res;
 END$$
 
+DROP FUNCTION IF EXISTS `updateinventory`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `updateinventory` (`vid` INT, `vmiligrams` INT, `vname` VARCHAR(100), `vdescription` VARCHAR(5000), `vadmissiondate` DATE, `vexpirationdate` DATE, `vlotecode` VARCHAR(10), `vquantity` INT, `vprice` INT, `vprovider_id` INT, `vshelf_id` INT, `vtypeproduct_id` INT, `vlaboratory_id` INT, `vstatus_id` INT, `vimagen` VARCHAR(5000)) RETURNS INT(1) READS SQL DATA
+    DETERMINISTIC
+    COMMENT 'Funcion que modifica una ciudad'
+BEGIN 
+    DECLARE res INT DEFAULT 0;
+    
+IF NOT EXISTS(select name from inventory where name=vname and id<>vid)
+		THEN
+            UPDATE inventory
+            SET  milligrams = vmiligrams,
+								name = vname,
+								description = vdescription,
+                                admissiondate = vadmissiondate,
+                                expirationdate = vexpirationdate,
+                                lotecode = vlotecode,
+                                quantity = vquantity,
+                                price = vprice,
+                                provider_id = vprovider_id,
+                                shelf_id = vshelf_id,
+                                typeproduct_id = vtypeproduct_id,
+                                laboratory_id = vlaboratory_id,
+                                status_id = vstatus_id,
+                                imagen = vimagen
+            WHERE id=vid;
+
+	set res=1;
+								
+			
+		END IF;
+
+	RETURN res;
+END$$
+
 DROP FUNCTION IF EXISTS `updatelaboratory`$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `updatelaboratory` (`vid` INT, `vname` VARCHAR(50), `vdescription` VARCHAR(50)) RETURNS INT(1) READS SQL DATA
     DETERMINISTIC
@@ -430,6 +553,44 @@ IF NOT EXISTS(select name from laboratory where name=vname and id<>vid)
 
             UPDATE laboratory
             SET  name=vname, description=vdescription
+            WHERE id=vid;
+
+	set res=1;
+								
+			
+		END IF;
+
+	RETURN res;
+END$$
+
+DROP FUNCTION IF EXISTS `updatepharmacy`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `updatepharmacy` (`vid` INT, `vname` VARCHAR(50), `vimagen` VARCHAR(5000), `vnit` VARCHAR(200)) RETURNS INT(1) READS SQL DATA
+    DETERMINISTIC
+    COMMENT 'Funcion que modifica una farmacia'
+BEGIN 
+    DECLARE res INT DEFAULT 0;
+IF NOT EXISTS(select name from pharmacy where name=vname and id<>vid)
+		THEN
+            UPDATE pharmacy
+            SET  name=vname, imagen=vimagen, nit = vnit
+            WHERE id=vid;
+	set res=1;
+		END IF;
+	RETURN res;
+END$$
+
+DROP FUNCTION IF EXISTS `updateprovider`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `updateprovider` (`vid` INT, `vname` VARCHAR(50), `vnit` VARCHAR(100), `vaddress` VARCHAR(50), `vcity_id` INT) RETURNS INT(1) READS SQL DATA
+    DETERMINISTIC
+    COMMENT 'Funcion que modifica un proveedor'
+BEGIN 
+    DECLARE res INT DEFAULT 0;
+    
+IF NOT EXISTS(select name from provider where name=vname and id<>vid)
+		THEN
+
+            UPDATE provider
+            SET  name=vname, nit=vnit, address = vaddress, city_id = vcity_id
             WHERE id=vid;
 
 	set res=1;
@@ -528,6 +689,30 @@ IF NOT EXISTS(select name from typeproduct where name=vname and id<>vid)
 	RETURN res;
 END$$
 
+DROP FUNCTION IF EXISTS `updateuser`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `updateuser` (`vid` INTEGER, `vname` VARCHAR(50), `vlastname` VARCHAR(50), `vdocumenttype` VARCHAR(50), `vdocumentnumber` VARCHAR(50), `vgender` VARCHAR(50), `vage` INTEGER, `vbirthdate` DATETIME, `vpoints` INTEGER, `vpassword` VARCHAR(100), `vrol_id` INTEGER, `vcity_id` INTEGER, `vadmissiondate` DATETIME) RETURNS INT(1) READS SQL DATA
+    DETERMINISTIC
+    COMMENT 'Funcion que modifica un usuario'
+BEGIN 
+    DECLARE res INT DEFAULT 0;
+    
+IF NOT EXISTS(select name from user where documentnumber=vdocumentnumber and id<>vid)
+		THEN
+
+            UPDATE user
+            SET  name=vname, lastname=vlastname, documenttype=vdocumenttype, documentnumber = vdocumentnumber, age = vage,
+            gender = vgender, birthdate = vbirthdate, points = vpoints, password = vpassword,
+            rol_id = vrol_id, city_id = vcity_id, admissiondate = vadmissiondate
+            WHERE id=vid;
+
+	set res=1;
+								
+			
+		END IF;
+
+	RETURN res;
+END$$
+
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -544,20 +729,17 @@ CREATE TABLE IF NOT EXISTS `city` (
   `department_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `city_department_fk` (`department_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `city`
 --
 
 INSERT DELAYED IGNORE INTO `city` (`id`, `name`, `description`, `department_id`) VALUES
-(10, 'Armenia', 'Capital del Quindio', 9),
-(11, 'Manizales', 'Capital de Caldas', 11),
-(12, 'asdasdasdasd', 'asdasdasasdasdasd', 9),
-(13, 'asdasdasdasdasdasda', 'asdasdasasdasdasdsdasdasd', 10),
-(15, 'cxcvxcv', 'xcvxcvxcvx', 10),
-(19, 'vbnvbn', 'vbnvbnvbn', 13),
-(17, 'Armenia2', 'asdasdasda', 9);
+(24, 'asd', 'asd', 68),
+(23, 'salento', 'Salento', 68),
+(20, 'Armenia', 'Armenia', 68),
+(21, 'Calarca', 'Calarca', 68);
 
 -- --------------------------------------------------------
 
@@ -571,17 +753,14 @@ CREATE TABLE IF NOT EXISTS `department` (
   `name` varchar(50) DEFAULT NULL,
   `description` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `department`
 --
 
 INSERT DELAYED IGNORE INTO `department` (`id`, `name`, `description`) VALUES
-(9, 'Quindio2', 'Departamento del Quindio'),
-(10, 'Risaralda', 'Departamento de Risaralda'),
-(11, 'Caldas', 'Departamento de Caldas'),
-(13, 'asdasdasd', 'asdasdasd');
+(68, 'Quindio', 'Quindio');
 
 -- --------------------------------------------------------
 
@@ -629,14 +808,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   KEY `inventory_shelf_fk` (`shelf_id`),
   KEY `inventory_status_fk` (`status_id`),
   KEY `inventory_typeproduct_fk` (`typeproduct_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `inventory`
---
-
-INSERT DELAYED IGNORE INTO `inventory` (`id`, `milligrams`, `name`, `description`, `admissiondate`, `expirationdate`, `lotecode`, `quantity`, `price`, `provider_id`, `shelf_id`, `typeproduct_id`, `laboratory_id`, `status_id`, `imagen`) VALUES
-(1, 50, 'asdasd', 'asdasdasd', '2020-05-13', '2020-05-13', 'asdasd', 1000, 5000, 1, 2, 3, 5, 2, 'C:fakepath96255000_3198374060192967_4446344676772937728_n.jpg');
+) ENGINE=MyISAM AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -668,7 +840,7 @@ CREATE TABLE IF NOT EXISTS `laboratory` (
   `name` varchar(50) DEFAULT NULL,
   `description` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `laboratory`
@@ -676,7 +848,7 @@ CREATE TABLE IF NOT EXISTS `laboratory` (
 
 INSERT DELAYED IGNORE INTO `laboratory` (`id`, `name`, `description`) VALUES
 (6, 'Laboratorio Mk', 'El Grupo colombiano TecnoquÃ­micas.'),
-(5, 'Bayer', 'Si es Bayer es bueno');
+(5, 'Bayerx', 'Si es Bayer es bueno');
 
 -- --------------------------------------------------------
 
@@ -688,10 +860,17 @@ DROP TABLE IF EXISTS `pharmacy`;
 CREATE TABLE IF NOT EXISTS `pharmacy` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
-  `logo` varchar(5000) DEFAULT NULL,
+  `imagen` varchar(5000) DEFAULT NULL,
   `nit` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `pharmacy`
+--
+
+INSERT DELAYED IGNORE INTO `pharmacy` (`id`, `name`, `imagen`, `nit`) VALUES
+(16, 'Farmacia', 'Resource/Img/Pharmacy/2020_5_20_31100541_1301964629903999_7828916508636039120_n.jpg', 'ads1');
 
 -- --------------------------------------------------------
 
@@ -708,16 +887,14 @@ CREATE TABLE IF NOT EXISTS `provider` (
   `city_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `provider_city_fk` (`city_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `provider`
 --
 
 INSERT DELAYED IGNORE INTO `provider` (`id`, `name`, `nit`, `address`, `city_id`) VALUES
-(1, 'medica', 'asdasd', 'asdasdasd', 10),
-(2, 'Proveedor1', '1asd', 'asdasdas', 10),
-(3, 'Proveedor2', 'asdasdasdasdasd', 'asdasdasdasdasda', 10);
+(6, 'zxczxc', 'zxczxcz', 'zxczxc', 21);
 
 -- --------------------------------------------------------
 
@@ -738,8 +915,9 @@ CREATE TABLE IF NOT EXISTS `rol` (
 --
 
 INSERT DELAYED IGNORE INTO `rol` (`id`, `name`, `description`) VALUES
-(1, 'Empleado', ''),
-(2, 'Administradoras', 'Gestiona todas la acciones en la farmacias');
+(1, 'Empleado', 'Gestion de inventario/ventas'),
+(2, 'Administrador', 'Gestiona todas la acciones en la farmacias'),
+(3, 'cliente', 'usuario comun');
 
 -- --------------------------------------------------------
 
@@ -771,14 +949,7 @@ CREATE TABLE IF NOT EXISTS `shelf` (
   `name` varchar(50) DEFAULT NULL,
   `description` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `shelf`
---
-
-INSERT DELAYED IGNORE INTO `shelf` (`id`, `name`, `description`) VALUES
-(2, 'Estante1', 'asdasdasd');
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -791,15 +962,14 @@ CREATE TABLE IF NOT EXISTS `state` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `state`
 --
 
 INSERT DELAYED IGNORE INTO `state` (`id`, `name`) VALUES
-(3, 'diegoddddd'),
-(2, 'asdasdasdasdasdasdasd');
+(3, 'diegoddddd');
 
 -- --------------------------------------------------------
 
@@ -813,7 +983,7 @@ CREATE TABLE IF NOT EXISTS `typeproduct` (
   `name` varchar(50) DEFAULT NULL,
   `description` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `typeproduct`
@@ -821,7 +991,7 @@ CREATE TABLE IF NOT EXISTS `typeproduct` (
 
 INSERT DELAYED IGNORE INTO `typeproduct` (`id`, `name`, `description`) VALUES
 (5, 'asdasdasdasd', 'asdasdasdad'),
-(3, 'asdasda', 'asdasd');
+(6, 'zxczx', 'czxczxc');
 
 -- --------------------------------------------------------
 
@@ -843,19 +1013,20 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(100) DEFAULT NULL,
   `rol_id` int(11) NOT NULL,
   `city_id` int(11) NOT NULL,
-  `admissiondate` datetime DEFAULT NULL,
+  `admissiondate` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_city_fk` (`city_id`),
   KEY `user_rol_fk` (`rol_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `user`
 --
 
 INSERT DELAYED IGNORE INTO `user` (`id`, `name`, `lastname`, `documenttype`, `documentnumber`, `gender`, `age`, `birthdate`, `points`, `password`, `rol_id`, `city_id`, `admissiondate`) VALUES
-(9, 'alvaro', 'corrales', '1', '1094950977', '1', 15, '2020-05-14', 0, '$2y$10$LxPia6migOBR9d4vu9xnleBBDgHy19lnjyts9uoeTxBpfmq0eNm3S', 1, 0, '2020-05-14 00:00:00'),
-(8, 'alvaro', 'alvarado', '1', '1234', '1', 24, '2020-02-02', 0, '$2y$10$xTm7aCHOnEmWZks7Vu4m9uVaulVxzLUtsxnZin4U/.WGHp4X6Izee', 2, 10, '2020-02-02 00:00:00');
+(25, 'Diego Alejandro', 'Lugo Tellez', 'Cedula', '1094950977', 'Masculino', 24, '2020-04-02', 0, '$2y$10$3/XGn9ZdK8DoWHN36rhHPeoSCsxD.1VwwgBfy.AYkl4R1xnGBSOCK', 2, 20, '2020-01-01'),
+(36, 'sdfsdfsdfsdfsdfsd', 'fsdfsdfsdfsdfsdf', 'Cedula', '123456', 'Masculino', 25, '2020-05-23', 0, '$2y$10$zE0RxWYS9om4jbsFbnnjleqmF/dwManEMQ8eeGq/Nd/HWPKs8fJ4e', 1, 20, '2020-05-21'),
+(35, 'asd', 'asd', 'Cedula', '123', 'Masculino', 4, '2020-01-01', 0, '$2y$10$OuZ5Io5.qCL84b72QIot.OJYWtj4tKzT0h.rG/9F91zm3khON90uq', 1, 20, '2020-05-20');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
