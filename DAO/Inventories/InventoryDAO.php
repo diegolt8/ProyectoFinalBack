@@ -46,6 +46,12 @@ class InventoryDAO
         $query = $this->repository->buildQuery("listinventory", array((int) $obj->getId()));
         $this->repository->Execute($query);
     }
+    
+    public function total(InventoryDTO $obj, $type)
+    {
+        $query = $this->repository->buildQuery("totalsale", array((int) $obj->getId(), (int) $obj->getQuantity()));
+        $this->repository->Execute($query);
+    }
 
 
     /**

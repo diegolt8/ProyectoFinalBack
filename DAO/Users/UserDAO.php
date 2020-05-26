@@ -50,6 +50,18 @@ class userDAO
         $query = $this->repository->buildQuery("listuser", array((int) $obj->getIdUser()));
         $this->repository->Execute($query);
     }
+    
+    public function ListEmployee(UserDTO $obj, $type)
+    {
+        $query = $this->repository->buildQuery("listemployee", array((int) $obj->getIdUser()));
+        $this->repository->Execute($query);
+    }
+    
+     public function ListClient(UserDTO $obj, $type)
+    {
+        $query = $this->repository->buildQuery("listclient", array((int) $obj->getIdUser()));
+        $this->repository->Execute($query);
+    }
 
     /**
      * ejecuta un buscar en la base de datos

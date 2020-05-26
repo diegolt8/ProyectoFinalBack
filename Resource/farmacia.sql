@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 22-05-2020 a las 05:31:43
+-- Tiempo de generación: 26-05-2020 a las 02:33:18
 -- Versión del servidor: 10.4.10-MariaDB
 -- Versión de PHP: 7.3.12
 
@@ -26,6 +26,14 @@ DELIMITER $$
 --
 -- Procedimientos
 --
+DROP PROCEDURE IF EXISTS `history`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `history` (`vid` INT)  BEGIN
+	SELECT *
+    FROM sale
+    join detailsale on detailsale.sale_id = sale.id
+    WHERE client_id = vid;
+END$$
+
 DROP PROCEDURE IF EXISTS `listcity`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listcity` (`vid` INT)  BEGIN
 	SELECT id, name, description, department_id
@@ -33,10 +41,26 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `listcity` (`vid` INT)  BEGIN
     order by id;
 END$$
 
+DROP PROCEDURE IF EXISTS `listclient`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listclient` (`vid` INT)  BEGIN
+	SELECT id, name, lastname, documenttype, documentnumber, gender, age, birthdate, points, password, rol_id, city_id, admissiondate
+    FROM user
+    WHERE rol_id = 3
+    order by id;
+END$$
+
 DROP PROCEDURE IF EXISTS `listdepartment`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listdepartment` (`vid` INT)  BEGIN
 	SELECT id, name, description
     FROM department
+    order by id;
+END$$
+
+DROP PROCEDURE IF EXISTS `listemployee`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listemployee` (`vid` INT)  BEGIN
+	SELECT id, name, lastname, documenttype, documentnumber, gender, age, birthdate, points, password, rol_id, city_id, admissiondate
+    FROM user
+    WHERE rol_id = 1
     order by id;
 END$$
 
@@ -113,6 +137,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `listuser` (`vid` INT)  BEGIN
 	SELECT id, name, lastname, documenttype, documentnumber, gender, age, birthdate, points, password, rol_id, city_id, admissiondate
     FROM user
     order by id;
+END$$
+
+DROP PROCEDURE IF EXISTS `totalsale`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `totalsale` (`vid` INT, `vquantity` INT)  BEGIN
+	SELECT price * vquantity as total
+    FROM inventory
+    where id = vid;
 END$$
 
 --
@@ -379,6 +410,25 @@ if not exists(select name from rol where name=vname)
             set res = 1;
 end if;
 RETURN res;
+END$$
+
+DROP FUNCTION IF EXISTS `savesales`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `savesales` (`vsaledate` DATE, `vsaletotal` INTEGER, `vclient_id` INTEGER, `vemployee_id` INTEGER) RETURNS INT(1) READS SQL DATA
+    DETERMINISTIC
+    COMMENT 'Funcion que almace una venta'
+BEGIN
+	DECLARE res INT DEFAULT 0;
+IF NOT EXISTS(SELECT saledate from sale join user on user.id = sale.client_id where client_id = vclient_id)
+	THEN
+		insert into sale(saledate, saletotal, client_id, employee_id) 
+        values (vsaledate, vsaletotal, vclient_id, vemployee_id);
+		IF(vsaletotal > 10000)
+			THEN
+				insert into user(points) values(100);
+		set res = 1;
+end if;
+end if;
+RETURN 1;
 END$$
 
 DROP FUNCTION IF EXISTS `saveshelf`$$
@@ -735,7 +785,7 @@ CREATE TABLE IF NOT EXISTS `city` (
 -- Volcado de datos para la tabla `city`
 --
 
-INSERT DELAYED IGNORE INTO `city` (`id`, `name`, `description`, `department_id`) VALUES
+INSERT DELAYED INTO `city` (`id`, `name`, `description`, `department_id`) VALUES
 (24, 'asd', 'asd', 68),
 (23, 'salento', 'Salento', 68),
 (20, 'Armenia', 'Armenia', 68),
@@ -759,7 +809,7 @@ CREATE TABLE IF NOT EXISTS `department` (
 -- Volcado de datos para la tabla `department`
 --
 
-INSERT DELAYED IGNORE INTO `department` (`id`, `name`, `description`) VALUES
+INSERT DELAYED INTO `department` (`id`, `name`, `description`) VALUES
 (68, 'Quindio', 'Quindio');
 
 -- --------------------------------------------------------
@@ -777,7 +827,14 @@ CREATE TABLE IF NOT EXISTS `detailsale` (
   PRIMARY KEY (`id`),
   KEY `detailsale_inventory_fk` (`inventory_id`),
   KEY `detailsale_sale_fk` (`sale_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `detailsale`
+--
+
+INSERT DELAYED INTO `detailsale` (`id`, `inventory_id`, `sale_id`, `quantity`) VALUES
+(1, 47, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -808,7 +865,15 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   KEY `inventory_shelf_fk` (`shelf_id`),
   KEY `inventory_status_fk` (`status_id`),
   KEY `inventory_typeproduct_fk` (`typeproduct_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `inventory`
+--
+
+INSERT DELAYED INTO `inventory` (`id`, `milligrams`, `name`, `description`, `admissiondate`, `expirationdate`, `lotecode`, `quantity`, `price`, `provider_id`, `shelf_id`, `typeproduct_id`, `laboratory_id`, `status_id`, `imagen`) VALUES
+(47, 9, 'asdasdasd', 'sdasdasd', '2020-05-22', '2020-02-01', 'asdas', 4, 1000, 12, 9, 5, 19, 3, 'Resource/Img/Inventory/2020_5_23_31100541_1301964629903999_7828916508636039120_n.jpg'),
+(48, 10, 'prueba', 'asdasdasdas', '2020-05-25', '2020-01-01', 'asda', 3, 4, 12, 9, 5, 19, 3, 'Resource/Img/Inventory/2020_5_25_wallpaperflare.com_wallpaper (1).jpg');
 
 -- --------------------------------------------------------
 
@@ -840,15 +905,15 @@ CREATE TABLE IF NOT EXISTS `laboratory` (
   `name` varchar(50) DEFAULT NULL,
   `description` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `laboratory`
 --
 
-INSERT DELAYED IGNORE INTO `laboratory` (`id`, `name`, `description`) VALUES
-(6, 'Laboratorio Mk', 'El Grupo colombiano TecnoquÃ­micas.'),
-(5, 'Bayerx', 'Si es Bayer es bueno');
+INSERT DELAYED INTO `laboratory` (`id`, `name`, `description`) VALUES
+(19, 'Bayer', 'Si es Bayer es bueno'),
+(20, 'MK', 'medicamentos totalmente confiables');
 
 -- --------------------------------------------------------
 
@@ -869,7 +934,7 @@ CREATE TABLE IF NOT EXISTS `pharmacy` (
 -- Volcado de datos para la tabla `pharmacy`
 --
 
-INSERT DELAYED IGNORE INTO `pharmacy` (`id`, `name`, `imagen`, `nit`) VALUES
+INSERT DELAYED INTO `pharmacy` (`id`, `name`, `imagen`, `nit`) VALUES
 (16, 'Farmacia', 'Resource/Img/Pharmacy/2020_5_20_31100541_1301964629903999_7828916508636039120_n.jpg', 'ads1');
 
 -- --------------------------------------------------------
@@ -887,14 +952,15 @@ CREATE TABLE IF NOT EXISTS `provider` (
   `city_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `provider_city_fk` (`city_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `provider`
 --
 
-INSERT DELAYED IGNORE INTO `provider` (`id`, `name`, `nit`, `address`, `city_id`) VALUES
-(6, 'zxczxc', 'zxczxcz', 'zxczxc', 21);
+INSERT DELAYED INTO `provider` (`id`, `name`, `nit`, `address`, `city_id`) VALUES
+(12, 'Proveedor 1', '12345', 'Carrera tal calle tal', 20),
+(13, 'proveedor2', '123456', 'carrera tal calle 2', 21);
 
 -- --------------------------------------------------------
 
@@ -914,7 +980,7 @@ CREATE TABLE IF NOT EXISTS `rol` (
 -- Volcado de datos para la tabla `rol`
 --
 
-INSERT DELAYED IGNORE INTO `rol` (`id`, `name`, `description`) VALUES
+INSERT DELAYED INTO `rol` (`id`, `name`, `description`) VALUES
 (1, 'Empleado', 'Gestion de inventario/ventas'),
 (2, 'Administrador', 'Gestiona todas la acciones en la farmacias'),
 (3, 'cliente', 'usuario comun');
@@ -935,7 +1001,15 @@ CREATE TABLE IF NOT EXISTS `sale` (
   PRIMARY KEY (`id`),
   KEY `sale_user_fk` (`client_id`),
   KEY `sale_user_fkv2` (`employee_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `sale`
+--
+
+INSERT DELAYED INTO `sale` (`id`, `saledate`, `saletotal`, `client_id`, `employee_id`) VALUES
+(1, '2020-05-05', 15000, 44, 45),
+(2, '2020-02-02', 20000, 46, 45);
 
 -- --------------------------------------------------------
 
@@ -949,7 +1023,15 @@ CREATE TABLE IF NOT EXISTS `shelf` (
   `name` varchar(50) DEFAULT NULL,
   `description` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `shelf`
+--
+
+INSERT DELAYED INTO `shelf` (`id`, `name`, `description`) VALUES
+(9, 'Estante 1', 'Jeringas'),
+(10, 'Estante 3', 'Acetaminofenasdasd');
 
 -- --------------------------------------------------------
 
@@ -968,7 +1050,7 @@ CREATE TABLE IF NOT EXISTS `state` (
 -- Volcado de datos para la tabla `state`
 --
 
-INSERT DELAYED IGNORE INTO `state` (`id`, `name`) VALUES
+INSERT DELAYED INTO `state` (`id`, `name`) VALUES
 (3, 'diegoddddd');
 
 -- --------------------------------------------------------
@@ -989,7 +1071,7 @@ CREATE TABLE IF NOT EXISTS `typeproduct` (
 -- Volcado de datos para la tabla `typeproduct`
 --
 
-INSERT DELAYED IGNORE INTO `typeproduct` (`id`, `name`, `description`) VALUES
+INSERT DELAYED INTO `typeproduct` (`id`, `name`, `description`) VALUES
 (5, 'asdasdasdasd', 'asdasdasdad'),
 (6, 'zxczx', 'czxczxc');
 
@@ -1017,16 +1099,19 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`),
   KEY `user_city_fk` (`city_id`),
   KEY `user_rol_fk` (`rol_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `user`
 --
 
-INSERT DELAYED IGNORE INTO `user` (`id`, `name`, `lastname`, `documenttype`, `documentnumber`, `gender`, `age`, `birthdate`, `points`, `password`, `rol_id`, `city_id`, `admissiondate`) VALUES
-(25, 'Diego Alejandro', 'Lugo Tellez', 'Cedula', '1094950977', 'Masculino', 24, '2020-04-02', 0, '$2y$10$3/XGn9ZdK8DoWHN36rhHPeoSCsxD.1VwwgBfy.AYkl4R1xnGBSOCK', 2, 20, '2020-01-01'),
-(36, 'sdfsdfsdfsdfsdfsd', 'fsdfsdfsdfsdfsdf', 'Cedula', '123456', 'Masculino', 25, '2020-05-23', 0, '$2y$10$zE0RxWYS9om4jbsFbnnjleqmF/dwManEMQ8eeGq/Nd/HWPKs8fJ4e', 1, 20, '2020-05-21'),
-(35, 'asd', 'asd', 'Cedula', '123', 'Masculino', 4, '2020-01-01', 0, '$2y$10$OuZ5Io5.qCL84b72QIot.OJYWtj4tKzT0h.rG/9F91zm3khON90uq', 1, 20, '2020-05-20');
+INSERT DELAYED INTO `user` (`id`, `name`, `lastname`, `documenttype`, `documentnumber`, `gender`, `age`, `birthdate`, `points`, `password`, `rol_id`, `city_id`, `admissiondate`) VALUES
+(44, 'Alvaro', 'Corrales', 'Cedula', '456', 'Masculino', 6, '2020-01-01', 100, '$2y$10$867gvpzqEJf7Bx/4hv1tcOwWDNNH0QGJ201hdhVw4RTu6S9L77Q4i', 3, 20, '2020-05-22'),
+(45, 'asdasd', 'asdasdasd', 'Cedula', '123', 'Masculino', 3, '2020-01-01', 0, '$2y$10$mD2ycuqPH.4dZ2vM4C2t3.Q3r1itBN4R4E8Wo1CdsOO1lyjuIsati', 1, 20, '2020-05-22'),
+(46, 'Diego', 'Alejandro', 'Cedula', '123789', 'Masculino', 24, '2020-01-01', 0, '$2y$10$bZQ5WpPkMR10JnDfudhDNekzV64VATFFlxBjlfD59N8Q2Jkc5Vsle', 3, 20, '2020-05-24'),
+(43, 'Johan', 'Meneses', 'Cedula', '147', 'Masculino', 27, '2020-05-22', 0, '$2y$10$iKZrQcsjcReig2ODIw.Cyu/KOMX..Q9erPaqkkl7Yrx8D/OkboUTK', 1, 20, '2020-05-22'),
+(42, 'Administrador', 'Admin', 'Cedula', '1094950977', 'Masculino', 24, '2020-02-01', 0, '$2y$10$WrmcO6z0WTxAQjd8XXZM.OJUMyaYcwIbvzHPnFhx.MWsKFvqP0O36', 2, 20, '2020-05-22'),
+(41, 'Cristian2', 'Ospina', 'Cedula', '12345', 'Masculino', 3, '2020-01-01', 0, '$2y$10$ZHMvs3VjuwBz3CScIAeGcO7kEMdMJHzhnqgRb6Bb8RSePr1sHHMMC', 1, 20, '2020-05-22');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

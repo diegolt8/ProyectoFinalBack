@@ -30,6 +30,18 @@ function ExecuteAction($action, $obj, $dao) {
         case "list":
             $dao->ListAll($obj, false);
             break;
+ 
+        case "history":
+            $dao->History($obj, false);
+            break;
+        
+        case "listemployee":
+            $dao->ListEmployee($obj, false);
+            break;
+        
+        case "listclient":
+            $dao->ListClient($obj, false);
+            break;
 
         case "listNoTable":
             $dao->ListAllNoTable($obj, false);
@@ -37,6 +49,10 @@ function ExecuteAction($action, $obj, $dao) {
 
         case "listfilter":
             $dao->ListAll($obj, true);
+            break;
+        
+        case "totasale":
+            $dao->total($obj, false);
             break;
 
         case "generatePDFList":
