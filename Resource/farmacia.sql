@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 26-05-2020 a las 02:33:18
+-- Tiempo de generación: 28-05-2020 a las 02:11:26
 -- Versión del servidor: 10.4.10-MariaDB
 -- Versión de PHP: 7.3.12
 
@@ -30,7 +30,6 @@ DROP PROCEDURE IF EXISTS `history`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `history` (`vid` INT)  BEGIN
 	SELECT *
     FROM sale
-    join detailsale on detailsale.sale_id = sale.id
     WHERE client_id = vid;
 END$$
 
@@ -412,22 +411,18 @@ end if;
 RETURN res;
 END$$
 
-DROP FUNCTION IF EXISTS `savesales`$$
-CREATE DEFINER=`root`@`localhost` FUNCTION `savesales` (`vsaledate` DATE, `vsaletotal` INTEGER, `vclient_id` INTEGER, `vemployee_id` INTEGER) RETURNS INT(1) READS SQL DATA
+DROP FUNCTION IF EXISTS `savesale`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `savesale` (`vsaledate` DATE, `vsaletotal` INT, `vclient_id` INT, `vemployee_id` INT) RETURNS INT(1) READS SQL DATA
     DETERMINISTIC
-    COMMENT 'Funcion que almace una venta'
+    COMMENT 'Funcion que guarda una venta'
 BEGIN
-	DECLARE res INT DEFAULT 0;
-IF NOT EXISTS(SELECT saledate from sale join user on user.id = sale.client_id where client_id = vclient_id)
-	THEN
-		insert into sale(saledate, saletotal, client_id, employee_id) 
-        values (vsaledate, vsaletotal, vclient_id, vemployee_id);
-		IF(vsaletotal > 10000)
-			THEN
-				insert into user(points) values(100);
-		set res = 1;
-end if;
-end if;
+	declare res int default 0;
+   if not exists(select * from sale where client_id=150000)
+	then
+		insert into sale(saledate, saletotal, client_id, employee_id)
+			     values (vsaledate, vsaletotal, vclient_id, vemployee_id);
+            set res = 1;
+            end if;
 RETURN 1;
 END$$
 
@@ -629,6 +624,28 @@ IF NOT EXISTS(select name from pharmacy where name=vname and id<>vid)
 	RETURN res;
 END$$
 
+DROP FUNCTION IF EXISTS `updatepoint`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `updatepoint` (`vid` INTEGER, `vpoints` INTEGER) RETURNS INT(1) READS SQL DATA
+    DETERMINISTIC
+    COMMENT 'Funcion que modifica un usuario'
+BEGIN 
+    DECLARE res INT DEFAULT 0;
+    
+IF NOT EXISTS(select id from user where  id=vid)
+		THEN
+
+            UPDATE user
+            SET  points = vpoints
+            WHERE id=vid;
+
+	set res=1;
+								
+			
+		END IF;
+
+	RETURN res;
+END$$
+
 DROP FUNCTION IF EXISTS `updateprovider`$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `updateprovider` (`vid` INT, `vname` VARCHAR(50), `vnit` VARCHAR(100), `vaddress` VARCHAR(50), `vcity_id` INT) RETURNS INT(1) READS SQL DATA
     DETERMINISTIC
@@ -648,6 +665,23 @@ IF NOT EXISTS(select name from provider where name=vname and id<>vid)
 			
 		END IF;
 
+	RETURN res;
+END$$
+
+DROP FUNCTION IF EXISTS `updatequantity`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `updatequantity` (`vid` INT, `vquantity` INT) RETURNS INT(1) READS SQL DATA
+    DETERMINISTIC
+    COMMENT 'Funcion que modifica la cantidad de los productos.'
+BEGIN 
+    DECLARE res INT DEFAULT 0;
+IF EXISTS(select id from inventory where id=vid)
+		THEN
+            UPDATE inventory
+            SET  id = vid,
+				 quantity = quantity - vquantity
+            WHERE id=vid;
+	set res=1;
+		END IF;
 	RETURN res;
 END$$
 
@@ -872,8 +906,8 @@ CREATE TABLE IF NOT EXISTS `inventory` (
 --
 
 INSERT DELAYED INTO `inventory` (`id`, `milligrams`, `name`, `description`, `admissiondate`, `expirationdate`, `lotecode`, `quantity`, `price`, `provider_id`, `shelf_id`, `typeproduct_id`, `laboratory_id`, `status_id`, `imagen`) VALUES
-(47, 9, 'asdasdasd', 'sdasdasd', '2020-05-22', '2020-02-01', 'asdas', 4, 1000, 12, 9, 5, 19, 3, 'Resource/Img/Inventory/2020_5_23_31100541_1301964629903999_7828916508636039120_n.jpg'),
-(48, 10, 'prueba', 'asdasdasdas', '2020-05-25', '2020-01-01', 'asda', 3, 4, 12, 9, 5, 19, 3, 'Resource/Img/Inventory/2020_5_25_wallpaperflare.com_wallpaper (1).jpg');
+(47, 9, 'asdasdasd', 'sdasdasd', '2020-05-22', '2020-02-01', 'asdas', 1, 1000, 12, 9, 5, 19, 3, 'Resource/Img/Inventory/2020_5_23_31100541_1301964629903999_7828916508636039120_n.jpg'),
+(48, 10, 'prueba', 'asdasdasdas', '2020-05-25', '2020-01-01', 'asda', 0, 4, 12, 9, 5, 19, 3, 'Resource/Img/Inventory/2020_5_25_wallpaperflare.com_wallpaper (1).jpg');
 
 -- --------------------------------------------------------
 
@@ -1001,15 +1035,63 @@ CREATE TABLE IF NOT EXISTS `sale` (
   PRIMARY KEY (`id`),
   KEY `sale_user_fk` (`client_id`),
   KEY `sale_user_fkv2` (`employee_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=56 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `sale`
 --
 
 INSERT DELAYED INTO `sale` (`id`, `saledate`, `saletotal`, `client_id`, `employee_id`) VALUES
-(1, '2020-05-05', 15000, 44, 45),
-(2, '2020-02-02', 20000, 46, 45);
+(8, '2020-05-27', 8012, 44, 41),
+(7, '2020-05-26', 8012, 46, 43),
+(6, '2020-05-26', 8012, 44, 43),
+(9, '2020-05-27', 8012, 46, 41),
+(10, '2020-05-27', 8012, 44, 41),
+(11, '2020-05-27', 8012, 44, 41),
+(12, '2020-05-27', 2012, 44, 41),
+(13, '2020-05-27', 2012, 44, 43),
+(14, '2020-05-27', 6008, 44, 43),
+(15, '2020-05-27', 8012, 44, 41),
+(16, '2020-05-27', 4004, 44, 41),
+(17, '2020-05-27', 11008, 44, 41),
+(18, '2020-05-27', 4004, 44, 41),
+(19, '2020-05-27', 2004, 44, 41),
+(20, '2020-05-27', 3000, 44, 41),
+(21, '2020-05-27', 3000, 44, 41),
+(22, '2020-05-27', 12, 44, 41),
+(23, '2020-05-27', 3000, 44, 41),
+(24, '2020-05-27', 6016, 44, 41),
+(25, '2020-05-27', 8016, 44, 41),
+(26, '2020-05-27', 4016, 44, 41),
+(27, '2020-05-27', 10020, 44, 41),
+(28, '2020-05-27', 7000, 44, 41),
+(29, '2020-05-27', 32, 44, 41),
+(30, '2020-05-27', 10000, 44, 41),
+(31, '2020-05-27', 32, 44, 41),
+(32, '2020-05-27', 3000, 44, 41),
+(33, '2020-05-27', 6000, 44, 41),
+(34, '2020-05-27', 7000, 44, 41),
+(35, '2020-05-27', 32, 44, 41),
+(36, '2020-05-27', 8000, 44, 41),
+(37, '2020-05-27', 9000, 44, 41),
+(38, '2020-05-27', 9000, 44, 41),
+(39, '2020-05-27', 32, 44, 41),
+(40, '2020-05-27', 9000, 44, 41),
+(41, '2020-05-27', 32, 44, 41),
+(42, '2020-05-27', 10000, 44, 41),
+(43, '2020-05-27', 10000, 44, 41),
+(44, '2020-05-27', 10000, 44, 41),
+(45, '2020-05-27', 10000, 44, 41),
+(46, '2020-05-27', 7000, 44, 43),
+(47, '2020-05-27', 32, 44, 41),
+(48, '2020-05-27', 7000, 44, 41),
+(49, '2020-05-27', 2000, 44, 41),
+(50, '2020-05-27', 1000, 44, 41),
+(51, '2020-05-27', 4, 44, 41),
+(52, '2020-05-27', 1000, 44, 41),
+(53, '2020-05-27', 5000, 44, 41),
+(54, '2020-05-27', 8036, 44, 41),
+(55, '2020-05-27', 18040, 44, 41);
 
 -- --------------------------------------------------------
 

@@ -26,6 +26,14 @@ function ExecuteAction($action, $obj, $dao) {
         case "update":
             $dao->Update($obj);
             break;
+        
+        case "updatepoint":
+            $dao->UpdatePoints($obj);
+            break;
+        
+        case "updatequantity":
+            $dao->UpdateQuantity($obj);
+            break;
 
         case "list":
             $dao->ListAll($obj, false);

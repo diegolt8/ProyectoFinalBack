@@ -95,6 +95,14 @@ class userDAO
         ));
         $this->repository->ExecuteTransaction($query);
     }
+    
+    public function UpdatePoints(UserDTO $obj) {
+        $query = $this->repository->buildQuerySimply("updatepoint", array(
+            (int) $obj->getId(),
+            (int) $obj->getPoints()
+        ));
+        $this->repository->ExecuteTransaction($query);
+    }
 
     /**
      * Ejecuta un borrar en la base de datos

@@ -82,6 +82,14 @@ class InventoryDAO
         ));
         $this->repository->ExecuteTransaction($query);
     }
+    
+    public function UpdateQuantity(InventoryDTO $obj)
+    {
+        $query = $this->repository->buildQuerySimply("updatequantity", array(
+            (int) $obj->getId(),(int) $obj->getQuantity()
+        ));
+        $this->repository->ExecuteTransaction($query);
+    }
 
     /**
      * Ejecuta un borrar en la base de datos
